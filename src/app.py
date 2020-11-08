@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, flash
+from flask import Flask, render_template, request, redirect, flash, url_for
 from flask_sqlalchemy import SQLAlchemy 
 
 #SQLite conexión
@@ -42,7 +42,7 @@ def add_contact():
         try:
             db.session.add(new_contact)
             db.session.commit()
-            flash("Contact successfully added")
+            flash(f"{fullname} has been successfully added")
             return redirect('/')
         except:
             return "Something went wrong adding the new contact :( "
@@ -59,7 +59,7 @@ def edit(id):
         #Persistimos los nuevo datos en la base de datos
         try:
             db.session.commit()
-            flash("Contact edited sucessfully")
+            flash(f"{contact_to_edit.fullname} has been edited sucessfully")
             return redirect('/')
         except:
             return "Something went wrong editing the contact :("
@@ -75,7 +75,7 @@ def delete(id):
     try:
         db.session.delete(contact_to_delete)
         db.session.commit()
-        flash("Contact deleted successfully")
+        flash(f"{contact_to_delete.fullname} has been deleted successfully")
         return redirect('/')
     except:
         return "Something went wrong deleting the contact :("
