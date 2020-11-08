@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}edit{% endblock %}
+
+{% block body %} 
+
+<!--Formulario para editar un contacto enviando nuevos datos a la BD-->
+    <form action="/edit/{{contact_to_edit.id}}" method='POST' >
+        <input type="text" name="fullname" value={{contact_to_edit.fullname}}>
+        <input type="text" name="phone" value={{contact_to_edit.phone}}>
+        <input type="text" name="email" value={{contact_to_edit.email}}>
+        <button type="submit"> Edit </button>
+    </form>
+{% endblock %}

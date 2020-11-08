@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+
+{% block title %}index{% endblock %}
+
+
+{% block body %}
+<div class="content">
+    <h1 style=text-align:center> Contact List </h1>
+    
+    <!--Mensajes FLASH-->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p> {{ message }}  </p>
+            {% endfor %} 
+        {% endif %} 
+    {% endwith %}
+
+    <!--Formulario para enviar los datos a la BD por medio de la función add_contact-->
+    <form action="/add_contact" , method="POST">
+        <input type="text" name="fullname" placeholder="Fullname">
+        <input type="text" name="phone" placeholder="Phone Number">
+        <input type="text" name="email" placeholder="Email">
+        <button type=submit>Send</button>
+    </form>
+
+    <!--Si la Tabla está vacía enviamos un mensaje-->
+    {% if contacts|length < 1 %}
+    <h4>Contact List Empty</h4>
+
+    {% else %}
+    <!--Creamos la tabla de contactos-->
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+        <!--Obtenemos la info de cada contacto creado en la BD-->
+        {% for contact in contacts %}
+        <tr>
+            <td> {{contact.fullname}} </td>
+            <td> {{contact.phone}} </td>
+            <td> {{contact.email}} </td>
+            <td>
+                <a href="/edit/{{contact.id}}">Edit</a>
+                <a href="/delete/{{contact.id}}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endif %}
+
+{% endblock %}
