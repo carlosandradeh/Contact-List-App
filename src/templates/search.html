@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}search{% endblock %}
+
+{% block body %}
+
+<div class="col-md-6">
+    <div class="table table-striped table-bordered table-sm">
+        {% if wanted_contacts|length < 1 %}
+        <h4>No results</h4>
+        {% else %}
+        <!--Creamos la tabla para mostrar a los contactos con el fullname indicado-->
+        <h4>Contacts</h4>
+        <table>  
+            <tr>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+            <!--Obtenemos la info de cada contacto con el fullnamem indicado creado en la BD-->
+            {% for wanted_contact in wanted_contacts %}
+            <tr>
+                <td> {{wanted_contact.fullname}} </td>
+                <td> {{wanted_contact.phone}} </td>
+                <td> {{wanted_contact.email}} </td>
+                <td>
+                    <a href="/edit/{{wanted_contact.id}}" class="btn btn-info">Edit</a>
+                    <a href="/delete/{{wanted_contact.id}}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+        <a href="/" class="btn btn-danger btn-block">Cancel</a>
+    </div>
+</div>
+
+{% endblock %}

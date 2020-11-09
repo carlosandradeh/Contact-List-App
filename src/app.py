@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, flash, url_for
-from flask_sqlalchemy import SQLAlchemy 
+from flask_sqlalchemy import SQLAlchemy   
 
 #SQLite conexión
 app = Flask(__name__)
@@ -18,15 +18,20 @@ class Contact(db.Model):
     email = db.Column(db.String)
 
     def __repr__(self):
-        return "<Contact %r" % self.id
+        return "<Contact %r" % self.id 
 
-
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['GET','POST'])
 def index():
-    #Obtenemos y ordenamos los datos de los contactos para mostrarlos
     if request.method == 'GET':
+        #Obtenemos y ordenamos los datos de los contactos para mostrarlos en la pag principal
         contacts = Contact.query.order_by(Contact.fullname).all()
         return render_template('index.html', contacts=contacts)
+    else:
+        #Obtenemos los contactos con el nombre solicitado en la barra de busqueda, para mostrarlos
+        contact_fullname_to_search = request.form['fullname']
+        wanted_contacts = Contact.query.filter_by(fullname=contact_fullname_to_search).all()
+        return render_template('search.html', wanted_contacts=wanted_contacts)
+        
 
 @app.route('/add_contact', methods=['POST'])
 def add_contact():
