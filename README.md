@@ -12,9 +12,6 @@ For this project we need to have the following libraries installed:
 * `Flask`,
 * `SQLAlchemy`.
 
-
-Para correr correctamente el programa escrito en la clase
-
 To run this Web App:
 
 Activate a Virtual enviroment:
