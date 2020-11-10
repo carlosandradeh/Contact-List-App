@@ -26,7 +26,7 @@ To activate the virtual enviroment in Windows (Or go to the virtualenv doc https
 ```
 $ pip install virtualenv
 $ virtualenv -p python env
-$ name\Scripts\activate
+$ env\Scripts\activate
 ```
 
 Install the libaries: 
