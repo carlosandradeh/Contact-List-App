@@ -6,7 +6,7 @@ This is a little Flask Contact List Web Application, using the ORM SQLAlchemy th
 Bootstrap is used for the frontend of this web application.
 
 
-[`Project WebHost`](https://contactlistflask.herokuapp.com/)
+Project WebHost: https://contactlistflask.herokuapp.com
 
 For this project we need to have the following libraries installed:
 * `Flask`,
